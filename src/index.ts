@@ -3,31 +3,28 @@ import { Hono } from "hono";
 
 const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
 
-app.get('/numbers/:startNumber/:endNumber', async (c) => {
-  const startNumber = parseInt(c.req.param('startNumber'))
-  const endNumber = parseInt(c.req.param('EndNumber'))
+app.get("/numbers/:startNumber/:endNumber", async (c) => {
+  const startNumber = parseInt(c.req.param("startNumber"));
+  const endNumber = parseInt(c.req.param("EndNumber"));
 
   if (isNaN(startNumber) || isNaN(endNumber)) {
-    return c.json({ error: 'startNumber or endNumber is missing' }, 400)
-  }
+    return c.json({ error: "startNumber or endNumber is missing" }, 400);
+  };
 
   if (endNumber - startNumber > 10000) {
-    return c.json({ error: 'Range cannot exceed 10,000' }, 400)
-  }
+    return c.json({ error: "Range cannot exceed 10,000" }, 400);
+  };
 
   const numbers = Array.from(
     { length: endNumber - startNumber + 1 }, 
-    (_, i) => startNumber + i
-  )
+    (_, i) => startNumber + i,
+  );
 
-  return c.json(numbers)
-})
-app.get("/", (c) => {
-  return c.text("Hello Hono!");
+  return c.json(numbers);
 });
 
 const port = 3000;
