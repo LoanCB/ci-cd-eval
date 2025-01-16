@@ -15,6 +15,10 @@ app.get("/numbers/:startNumber/:endNumber", async (c) => {
     return c.json({ error: "startNumber or endNumber is missing" }, 400);
   }
 
+  if (endNumber <= startNumber) {
+    return c.json({ error: "endNumber must be greater than startNumber" }, 400);
+  }
+
   if (endNumber - startNumber > 10000) {
     return c.json({ error: "Range cannot exceed 10,000" }, 400);
   }
