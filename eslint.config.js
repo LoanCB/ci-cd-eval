@@ -9,7 +9,7 @@ export default [
   },
   {
     files: ["**/*.ts"],
-    languageOptions: { globals: globals.browser },
+    languageOptions: { globals: { ...globals.browser, ...globals.jest } },
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": [
@@ -24,12 +24,6 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
-    },
-  },
-  {
-    files: ["*.spec.ts"],
-    env: {
-      jest: true,
     },
   },
   pluginJs.configs.recommended,
