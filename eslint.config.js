@@ -6,6 +6,14 @@ import tseslint from "typescript-eslint";
 export default [
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
+    overrides: [
+      {
+        files: ["*.spec.ts"],
+        env: {
+          jest: true,
+        },
+      },
+    ],
     languageOptions: { globals: globals.browser },
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",

@@ -1,7 +1,7 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 
-const app = new Hono();
+export const app = new Hono();
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
@@ -24,7 +24,7 @@ app.get("/numbers/:startNumber/:endNumber", async (c) => {
   }
 
   const numbers = Array.from(
-    { length: endNumber - startNumber + 1 }, 
+    { length: endNumber - startNumber + 1 },
     (_, i) => startNumber + i
   );
 
@@ -34,7 +34,7 @@ app.get("/numbers/:startNumber/:endNumber", async (c) => {
 const port = 3000;
 console.log(`Server is running on http://localhost:${port}`);
 
-serve({
+export const server = serve({
   fetch: app.fetch,
   port,
 });
