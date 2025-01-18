@@ -15,7 +15,7 @@ jobs:
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: ./Dockerfile
+          dockerfile: ./dockerfile
 
       - name: Build project image
         run: docker image build --tag="${IMAGE_NAME}" ./
