@@ -26,6 +26,12 @@ export default [
       ],
     },
   },
+  {
+    files: ["*.spec.ts"],
+    env: {
+      jest: true,
+    },
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
 ];
