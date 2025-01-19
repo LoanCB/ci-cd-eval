@@ -4,17 +4,12 @@ import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
-    overrides: [
-      {
-        files: ["*.spec.ts"],
-        env: {
-          jest: true,
-        },
-      },
-    ],
-    languageOptions: { globals: globals.browser },
+    ignores: ["dist/**", "node_modules/**"],
+  },
+  {
+    files: ["**/*.ts"],
+    languageOptions: { globals: { ...globals.browser, ...globals.jest } },
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": [
