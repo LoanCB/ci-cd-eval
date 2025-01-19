@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       IMAGE_NAME: "deploy-api"
-      DOCKER_USERNAME: "loancb"
       DOCKER_NAME: "ci-cd-eval"
     steps:
       - name: Checkout on branch
@@ -30,7 +29,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
         uses: docker/login-action@v3
         with:
-          username: "${DOCKER_USERNAME}"
+          username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push release image to docker hub
@@ -39,7 +38,7 @@ jobs:
         with:
           push: true
           context: ./
-          tags: "${DOCKER_USERNAME}/${DOCKER_NAME}:${{ github.ref_name }}"
+          tags: "${{ secrets.DOCKER_USERNAME }}/${DOCKER_NAME}:${{ github.ref_name }}"
 
       - name: Push unstable release to docker hub
         if: github.ref == 'refs/heads/main'
@@ -47,4 +46,4 @@ jobs:
         with:
           push: true
           context: ./
-          tags: "${DOCKER_USERNAME}/${DOCKER_NAME}:unstable"
+          tags: "${{ secrets.DOCKER_USERNAME }}/${DOCKER_NAME}:unstable"
