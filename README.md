@@ -18,6 +18,7 @@ Ouvrez [http://localhost:3000](http://localhost:3000)
 Cette action est déclenchée lors de chaque `push` sur le dépôt.
 
 **Étapes :**
+
 1. **Checkout on branch** : Utilise l'action `actions/checkout@v4` pour récupérer le code source du dépôt.
 2. **Lint Dockerfile** : Utilise l'action `hadolint/hadolint-action@v3.1.0` pour vérifier la syntaxe du Dockerfile.
 3. **Build project image** : Construit l'image Docker du projet avec la commande `docker image build --tag="${IMAGE_NAME}" ./`.
@@ -28,9 +29,10 @@ Cette action est déclenchée lors de chaque `push` sur le dépôt.
 
 #### Fichier `.github/workflows/release.yml`
 
-Cette action est déclenchée lors de la création d'un tag correspondant au pattern `v*`.
+Cette action est déclenchée lors de la création d'un tag, elle permet de générer automatiquement des notes de release.
 
 **Étapes :**
+
 1. **Checkout** : Utilise l'action `actions/checkout@v4` pour récupérer le code source du dépôt.
 2. **Create Release** : Utilise l'action `softprops/action-gh-release@v1` pour créer une release GitHub avec des notes de release générées automatiquement. Utilise le secret `GITHUB_TOKEN`.
 
